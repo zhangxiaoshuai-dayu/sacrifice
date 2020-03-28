@@ -13,7 +13,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SacrificeMapper {
 
-	void registerByNote(@Param(value = "username") String username,  @Param("pwd") String pwd, @Param("phoneNum") String phoneNum, @Param("sex") String sex);
+	void registerByNote(@Param(value = "username") String username, @Param("pwd") String pwd, @Param("phoneNum") String phoneNum, @Param("sex") String sex);
 
-	SacrificeRegister loginByPwd( @Param("phoneNum") String phoneNum, @Param("pwd") String pwd);
+	SacrificeRegister loginByPwd(@Param("phoneNum") String phoneNum, @Param("pwd") String pwd);
+
+	SacrificeRegister VerifyOldPwd(@Param("oldPwd") String oldPwd, @Param("phoneNum") String phoneNum);
+
+	void changePwd(@Param("phoneNum") String phoneNum, @Param("newPwd") String newPwd);
 }

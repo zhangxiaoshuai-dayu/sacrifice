@@ -35,7 +35,7 @@ public class SacrificeServiceImpl implements SacrificeService {
 			result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "注册成功");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			result = new Result(true, BaseEnums.OPERATION_FAILURE.code(), "注册失败");
+			result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "注册失败");
 		}
 		return result;
 	}
@@ -46,17 +46,62 @@ public class SacrificeServiceImpl implements SacrificeService {
 		try {
 			String phoneNum = (String) map.get("phoneNum");
 			String pwd = (String) map.get("pwd");
-			SacrificeRegister sacrificeRegister = sacrificeMapper.loginByPwd( phoneNum, pwd);
+			SacrificeRegister sacrificeRegister = sacrificeMapper.loginByPwd(phoneNum, pwd);
 			if (sacrificeRegister != null) {
 				String token = TokenUtils.token("phoneNum", "pwd");
-				result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "登录成功",token);
+				result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "登录成功", token);
 			} else {
-				result = new Result(true, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请检查登录信息");
+				result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请检查登录信息");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			result = new Result(true, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请检查登录信息");
+			result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请检查登录信息");
 		}
 		return result;
 	}
+
+	@Override
+	public Result VerifyOldPwd(Map map) {
+		Result result;
+		String tokenNew = null;
+		String oldPwd = (String) map.get("oldPwd");
+		String phoneNum = (String) map.get("phoneNum");
+		String token = (String) map.get("token");
+		boolean verify = TokenUtils.verify(token);
+		if (!verify) {
+			tokenNew = TokenUtils.token(phoneNum, oldPwd);
+		}
+		SacrificeRegister sacrificeRegister = sacrificeMapper.VerifyOldPwd(oldPwd, phoneNum);
+		if (sacrificeRegister != null) {
+			result = new Result(true, BaseEnums.SUCCESS.code(), "校验成功", tokenNew);
+		} else {
+			result = new Result(false, BaseEnums.FAILURE.code(), "原始密码错误，请重新输入", tokenNew);
+		}
+		return result;
+	}
+
+	@Override
+	public Result changePwd(Map map) {
+
+
+		Result result=null;
+		String tokenNew = null;
+		String newPwd = (String) map.get("newPwd");
+		String phoneNum = (String) map.get("phoneNum");
+		String token = (String) map.get("token");
+		boolean verify = TokenUtils.verify(token);
+		if (!verify) {
+			tokenNew = TokenUtils.token(phoneNum, newPwd);
+		}
+		try {
+			sacrificeMapper.changePwd(phoneNum, newPwd);
+			result = new Result(true, BaseEnums.SUCCESS.code(), "修改成功", tokenNew);
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			result = new Result(false, BaseEnums.FAILURE.code(), "修改失败", tokenNew);
+		}
+		return result;
+	}
+
+
 }

@@ -53,7 +53,33 @@ public class SacrificeController {
 		Result result = sacrificeService.loginByPwd(map);
 		LOGGER.info("登录结束");
 		return result;
-
 	}
 
+	/**
+	 * 修改密码一，校验原始密码
+	 *
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "VerifyOldPwd", method = RequestMethod.POST)
+	public Result VerifyOldPwd(@RequestBody Map map) {
+		LOGGER.info("校验密码开始");
+		Result result = sacrificeService.VerifyOldPwd(map);
+		LOGGER.info("检验密码结束");
+		return result;
+	}
+
+	/**
+	 * 修改密码二，修改密码
+	 *
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "changePwd", method = RequestMethod.POST)
+	public Result changePwd(@RequestBody Map map) {
+		LOGGER.info("修改密码开始");
+		Result result = sacrificeService.changePwd(map);
+		LOGGER.info("修改密码结束");
+		return result;
+	}
 }

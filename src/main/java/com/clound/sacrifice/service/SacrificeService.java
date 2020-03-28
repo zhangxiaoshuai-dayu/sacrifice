@@ -17,4 +17,8 @@ public interface SacrificeService {
 	Result registerByNote(Map map);
 
 	Result loginByPwd(Map map);
+
+	Result VerifyOldPwd(Map map);
+
+	Result changePwd(Map map);
 }

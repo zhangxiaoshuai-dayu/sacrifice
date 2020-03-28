@@ -19,7 +19,19 @@
 
     <select id="loginByPwd" resultMap="SacrificeRegister">
 
-        SELECT sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username FROM sacri_register WHERE sacrifice_pwd=#{pwd} and sacrifice_phonenum=#{phoneNum}
+    SELECT sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username FROM sacri_register WHERE sacrifice_pwd=#{pwd} and sacrifice_phonenum=#{phoneNum}
     </select>
+
+    <select id="VerifyOldPwd" resultMap="SacrificeRegister">
+
+    SELECT sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username FROM sacri_register WHERE sacrifice_pwd=#{oldPwd} and sacrifice_phonenum=#{phoneNum}
+
+    </select>
+
+    <update id="changePwd">
+
+        UPDATE sacri_register SET sacrifice_pwd=#{newPwd} WHERE sacrifice_phonenum=#{phoneNum}
+
+    </update>
 
 </mapper>
