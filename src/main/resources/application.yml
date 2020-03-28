@@ -1,0 +1,16 @@
+server:
+  port: 8082
+
+
+spring:
+  application:
+    name: service-project-sacrifice
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://62.234.114.92:3306/sacrifice?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+
