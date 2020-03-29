@@ -31,8 +31,15 @@ public class SacrificeServiceImpl implements SacrificeService {
 			String pwd = (String) map.get("pwd");
 			String phoneNum = (String) map.get("phoneNum");
 			String sex = (String) map.get("sex");
-			sacrificeMapper.registerByNote(username, pwd, phoneNum, sex);
-			result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "注册成功");
+			//去重
+			SacrificeRegister sacrificeRegister = sacrificeMapper.checkUser(phoneNum);
+			if (sacrificeRegister != null) {
+				result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "该手机号已注册，请直接登录");
+			} else {
+				//注册
+				sacrificeMapper.registerByNote(username, pwd, phoneNum, sex);
+				result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "注册成功");
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "注册失败");
@@ -84,7 +91,7 @@ public class SacrificeServiceImpl implements SacrificeService {
 	public Result changePwd(Map map) {
 
 
-		Result result=null;
+		Result result = null;
 		String tokenNew = null;
 		String newPwd = (String) map.get("newPwd");
 		String phoneNum = (String) map.get("phoneNum");
@@ -96,7 +103,7 @@ public class SacrificeServiceImpl implements SacrificeService {
 		try {
 			sacrificeMapper.changePwd(phoneNum, newPwd);
 			result = new Result(true, BaseEnums.SUCCESS.code(), "修改成功", tokenNew);
-		}catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			result = new Result(false, BaseEnums.FAILURE.code(), "修改失败", tokenNew);
 		}

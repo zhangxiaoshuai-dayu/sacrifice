@@ -22,6 +22,11 @@
     SELECT sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username FROM sacri_register WHERE sacrifice_pwd=#{pwd} and sacrifice_phonenum=#{phoneNum}
     </select>
 
+    <select id="checkUser" resultMap="SacrificeRegister">
+
+     select  sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username from  sacri_register WHERE sacrifice_phonenum=#{phoneNum}
+
+    </select>
     <select id="VerifyOldPwd" resultMap="SacrificeRegister">
 
     SELECT sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username FROM sacri_register WHERE sacrifice_pwd=#{oldPwd} and sacrifice_phonenum=#{phoneNum}

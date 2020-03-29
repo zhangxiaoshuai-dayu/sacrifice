@@ -20,4 +20,6 @@ public interface SacrificeMapper {
 	SacrificeRegister VerifyOldPwd(@Param("oldPwd") String oldPwd, @Param("phoneNum") String phoneNum);
 
 	void changePwd(@Param("phoneNum") String phoneNum, @Param("newPwd") String newPwd);
+
+	SacrificeRegister checkUser(@Param("phoneNum") String phoneNum);
 }
