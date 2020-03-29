@@ -30,14 +30,13 @@ public class SacrificeServiceImpl implements SacrificeService {
 			String username = (String) map.get("username");
 			String pwd = (String) map.get("pwd");
 			String phoneNum = (String) map.get("phoneNum");
-			String sex = (String) map.get("sex");
 			//去重
 			SacrificeRegister sacrificeRegister = sacrificeMapper.checkUser(phoneNum);
 			if (sacrificeRegister != null) {
 				result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "该手机号已注册，请直接登录");
 			} else {
 				//注册
-				sacrificeMapper.registerByNote(username, pwd, phoneNum, sex);
+				sacrificeMapper.registerByNote(username, pwd, phoneNum);
 				result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "注册成功");
 			}
 		} catch (Exception e) {

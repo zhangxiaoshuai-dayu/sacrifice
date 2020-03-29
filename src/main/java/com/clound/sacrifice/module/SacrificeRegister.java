@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public class SacrificeRegister {
 	public Integer id;
-	public String sex;
 	public String username;
 	public String pwd;
 	public String phoneNum;
@@ -25,13 +24,6 @@ public class SacrificeRegister {
 		this.id = id;
 	}
 
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
 
 	public String getUsername() {
 		return username;
@@ -63,7 +55,6 @@ public class SacrificeRegister {
 		if (o == null || getClass() != o.getClass()) return false;
 		SacrificeRegister that = (SacrificeRegister) o;
 		return id.equals(that.id) &&
-				sex.equals(that.sex) &&
 				username.equals(that.username) &&
 				pwd.equals(that.pwd) &&
 				phoneNum.equals(that.phoneNum);
@@ -71,14 +62,13 @@ public class SacrificeRegister {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, sex, username, pwd, phoneNum);
+		return Objects.hash(id,  username, pwd, phoneNum);
 	}
 
 	@Override
 	public String toString() {
 		return "SacrificeRegister{" +
 				"id=" + id +
-				", sex='" + sex + '\'' +
 				", username='" + username + '\'' +
 				", pwd='" + pwd + '\'' +
 				", phoneNum='" + phoneNum + '\'' +

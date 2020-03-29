@@ -13,7 +13,7 @@
 
     <insert id="registerByNote">
 
-    INSERT INTO sacri_register (sacrifice_phonenum,sacrifice_sex,sacrifice_pwd,sacrifice_username) VALUE (#{phoneNum},#{sex},#{pwd},#{username})
+    INSERT INTO sacri_register (sacrifice_phonenum,sacrifice_pwd,sacrifice_username) VALUE (#{phoneNum},#{pwd},#{username})
 
     </insert>
 
