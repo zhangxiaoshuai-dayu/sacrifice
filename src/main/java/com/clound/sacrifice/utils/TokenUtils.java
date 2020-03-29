@@ -56,7 +56,7 @@ public class TokenUtils {
 			DecodedJWT jwt = verifier.verify(token);
 			return true;
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println("token校验出现问题，重新分配token");
 			return false;
 		}
 	}
