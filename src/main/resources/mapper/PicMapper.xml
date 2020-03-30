@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.clound.sacrifice.dao.Picmapper">
+    <resultMap id="HeroPic" type="com.clound.sacrifice.module.HeroPic">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="hero_name" property="name" />
+        <result column="hero_deathTime" property="death" />
+        <result column="hero_birth" property="birth" />
+        <result column="hero_picPath" property="picPath" />
+        <result column="hero_describe" property="describe" />
+        <result column="pic_type" property="type" />
+    </resultMap>
+
+    <select id="getLastPic" resultMap="HeroPic">
+
+    SELECT id, hero_name ,hero_deathTime , hero_birth,hero_picPath ,hero_describe,pic_type from hero_pic where pic_type=2
+
+    </select>
+
+    <select id="getFirstPic" resultMap="HeroPic">
+
+    SELECT id, hero_name ,hero_deathTime , hero_birth,hero_picPath ,hero_describe,pic_type from hero_pic where pic_type=1
+
+    </select>
+
+
+</mapper>

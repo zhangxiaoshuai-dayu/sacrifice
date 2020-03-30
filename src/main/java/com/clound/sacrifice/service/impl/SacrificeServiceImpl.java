@@ -57,11 +57,11 @@ public class SacrificeServiceImpl implements SacrificeService {
 				String token = TokenUtils.token("phoneNum", "pwd");
 				result = new Result(true, BaseEnums.OPERATION_SUCCESS.code(), "登录成功", token);
 			} else {
-				result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请检查登录信息");
+				result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请确定账号已注册或账号密码信息正确");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "登录失败，请检查登录信息");
+			result = new Result(false, BaseEnums.OPERATION_FAILURE.code(), "登录失败，系统异常");
 		}
 		return result;
 	}
